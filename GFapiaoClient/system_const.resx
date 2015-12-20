@@ -121,7 +121,7 @@
     <value>ifapiao_cfg.xml</value>
   </data>
   <data name="service_url" xml:space="preserve">
-    <value>aifapiao.duapp.com/public/index.php/pos</value>
+    <value>http://aifapiao.duapp.com/public/index.php/pos</value>
     <comment>服务入口</comment>
   </data>
 </root>

@@ -27,7 +27,8 @@ namespace GFapiaoClient
         {
             WndInteract.Win32Locator.KickOffEnumWindows();
             InitializeComponent();
-            m_url = new Uri(String.Format("{0:s}?pos_id={1:s}", system_const.service_url, ConfigurationManager.AppSettings["pos_id"]));
+            String url = String.Format("{0:s}?pos_id={1:s}", system_const.service_url, ConfigurationManager.AppSettings["pos_id"]);
+            m_url = new Uri(url);
             mWorkClient.OpenReadCompleted += MWorkClient_OpenReadCompleted;
 
             plMain.Height = this.ClientSize.Height - this.flpOperator.Height - this.ssStatus.Height;
