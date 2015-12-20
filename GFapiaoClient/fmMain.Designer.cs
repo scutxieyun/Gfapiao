@@ -297,7 +297,6 @@
             this.tsmRegister.Name = "tsmRegister";
             this.tsmRegister.Size = new System.Drawing.Size(152, 22);
             this.tsmRegister.Text = "注册";
-            this.tsmRegister.Click += new System.EventHandler(this.tsmRegister_Click);
             // 
             // fmMain
             // 

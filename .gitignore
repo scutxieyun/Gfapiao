@@ -2,4 +2,6 @@ GFapiaoClient/bin/**
 GFapiaoClient/obj/**
 *.log
 WndInteract/obj/**
+WndInteract/bin/**
 MouseKeyboardLibrary/obj/**
+MouseKeyboardLibrary/bin/**
