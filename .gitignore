@@ -1,0 +1,5 @@
+GFapiaoClient/bin/**
+GFapiaoClient/obj/**
+*.log
+WndInteract/obj/**
+MouseKeyboardLibrary/obj/**
