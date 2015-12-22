@@ -70,7 +70,7 @@ namespace GFapiaoClient {
         }
         
         /// <summary>
-        ///   查找类似 http://aifapiao.duapp.com/public/index.php/pos 的本地化字符串。
+        ///   查找类似 http://aifapiao.duapp.com/public/index.php/fppos/index 的本地化字符串。
         /// </summary>
         internal static string service_url {
             get {

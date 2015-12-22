@@ -140,60 +140,20 @@ namespace GFapiaoClient
             OperatorAreaUpdate();
         }
 
+        
+
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-
-            using (StreamWriter writer = new StreamWriter(deskDir + "\\" + "爱发票辅助打印工具" + ".url"))
-            {
-                string app = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                writer.WriteLine("[InternetShortcut]");
-                writer.WriteLine("URL=file:///" + app);
-                writer.WriteLine("IconIndex=0");
-                string icon = app.Replace('\\', '/');
-                writer.WriteLine("IconFile=" + icon);
-                writer.Flush();
-            }
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            using (RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
-            {
-                key.SetValue("My Program", "\"" + Application.ExecutablePath + "\"");
-            }
+           
         }
 
         private void tsmDownload_Click(object sender, EventArgs e)
         {
 
         }
-
-        private String detectShuikong() {
-            String sk_list = getShuikongInfoList();
-            if (sk_list != null) {
-                foreach (String str in WndInteract.Win32Locator.GetWindows())
-                {
-                    if (WndInteract.Win32Locator.HasChinese(str) && sk_list.IndexOf(str) != -1)
-                    {
-                        return str;
-                    }
-                };
-            }
-            return null;
-        }
-
-        private String getShuikongInfoList() {
-            Uri url = new Uri(system_const.service_url + "/shuikonglist");
-            try
-            {
-                String res = mWorkClient.DownloadString(url);
-                return res;
-            }
-            catch (Exception e) {
-                return null;
-            }
-        }
-       
     }
 }

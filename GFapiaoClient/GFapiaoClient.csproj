@@ -55,8 +55,17 @@
     <Compile Include="fmMain.Designer.cs">
       <DependentUpon>fmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalHook.cs" />
+    <Compile Include="Keyboard.cs" />
+    <Compile Include="KeyboardHook.cs" />
+    <Compile Include="KeyboardSimulator.cs" />
+    <Compile Include="Mouse.cs" />
+    <Compile Include="MouseHook.cs" />
+    <Compile Include="MouseSimulator.cs" />
+    <Compile Include="NewShuiKongInterface.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScriptExecuter.cs" />
     <Compile Include="SysCfg.cs" />
     <Compile Include="system_const.Designer.cs">
       <AutoGen>True</AutoGen>
