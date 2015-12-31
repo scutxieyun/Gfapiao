@@ -70,11 +70,20 @@ namespace GFapiaoClient {
         }
         
         /// <summary>
-        ///   查找类似 http://aifapiao.duapp.com/public/index.php/fppos/index 的本地化字符串。
+        ///   查找类似 http://127.0.0.1/public/index.php/fppos 的本地化字符串。
         /// </summary>
         internal static string service_url {
             get {
                 return ResourceManager.GetString("service_url", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 shuikong_ops_script.txt 的本地化字符串。
+        /// </summary>
+        internal static string sk_script_fn {
+            get {
+                return ResourceManager.GetString("sk_script_fn", resourceCulture);
             }
         }
     }

@@ -121,7 +121,11 @@
     <value>ifapiao_cfg.xml</value>
   </data>
   <data name="service_url" xml:space="preserve">
-    <value>http://aifapiao.duapp.com/public/index.php/fppos/index</value>
+    <value>http://127.0.0.1/public/index.php/fppos</value>
     <comment>服务入口</comment>
+  </data>
+  <data name="sk_script_fn" xml:space="preserve">
+    <value>shuikong_ops_script.txt</value>
+    <comment>税控软件的控制脚本名</comment>
   </data>
 </root>

@@ -229,6 +229,12 @@ namespace WndInteract
             }
         }
 
+        [DllImport("user32.dll", EntryPoint = "GetSystemMetrics")]
+        public static extern int GetSystemMetrics(int abc);
+        static int SM_CXSCREEN = 0;
+        static int SM_CYSCREEN = 1;
+
+
         public static Bitmap CaptureScreen()
         {
             try
