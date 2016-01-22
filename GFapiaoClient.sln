@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GFapiaoClient", "GFapiaoClient\GFapiaoClient.csproj", "{C5DAA7AC-4B06-4F4C-AE1B-66569ADDC088}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ieTest", "ieTest\ieTest.csproj", "{7894CC02-D3E3-4B19-9E85-17482290F895}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skWebShell", "skWebShell\skWebShell.csproj", "{05F9D0A9-A046-4940-AFB1-CBB67472DB5D}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{C5DAA7AC-4B06-4F4C-AE1B-66569ADDC088}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5DAA7AC-4B06-4F4C-AE1B-66569ADDC088}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5DAA7AC-4B06-4F4C-AE1B-66569ADDC088}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7894CC02-D3E3-4B19-9E85-17482290F895}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7894CC02-D3E3-4B19-9E85-17482290F895}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7894CC02-D3E3-4B19-9E85-17482290F895}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7894CC02-D3E3-4B19-9E85-17482290F895}.Release|Any CPU.Build.0 = Release|Any CPU
 		{05F9D0A9-A046-4940-AFB1-CBB67472DB5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{05F9D0A9-A046-4940-AFB1-CBB67472DB5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05F9D0A9-A046-4940-AFB1-CBB67472DB5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
