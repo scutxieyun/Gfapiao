@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GFapiaoClient {
+namespace skWebShell {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace GFapiaoClient {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GFapiaoClient.system_const", typeof(system_const).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("skWebShell.system_const", typeof(system_const).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,11 @@ namespace GFapiaoClient {
         }
         
         /// <summary>
-        ///   查找类似 ifapiao_cfg.xml 的本地化字符串。
-        /// </summary>
-        internal static string local_cfg {
-            get {
-                return ResourceManager.GetString("local_cfg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 http://aifapiao.duapp.com/public/index.php/fppos 的本地化字符串。
         /// </summary>
         internal static string service_url {
             get {
                 return ResourceManager.GetString("service_url", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 shuikong_ops_script.txt 的本地化字符串。
-        /// </summary>
-        internal static string sk_script_fn {
-            get {
-                return ResourceManager.GetString("sk_script_fn", resourceCulture);
             }
         }
     }

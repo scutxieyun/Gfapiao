@@ -112,20 +112,13 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="local_cfg" xml:space="preserve">
-    <value>ifapiao_cfg.xml</value>
-  </data>
   <data name="service_url" xml:space="preserve">
     <value>http://aifapiao.duapp.com/public/index.php/fppos</value>
-    <comment>服务入口</comment>
-  </data>
-  <data name="sk_script_fn" xml:space="preserve">
-    <value>shuikong_ops_script.txt</value>
-    <comment>税控软件的控制脚本名</comment>
+    <comment>服务器入口</comment>
   </data>
 </root>
