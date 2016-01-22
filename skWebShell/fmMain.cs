@@ -10,7 +10,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using wbOps;
 namespace skWebShell
 {
     public partial class fmMain : Form
@@ -20,7 +20,7 @@ namespace skWebShell
         Uri m_url;
         String m_sent_printed_ids = null;
         String m_pending_printed_ids = null;
-
+        ISkInteract sk_ops;
 
 
         public fmMain()
@@ -30,6 +30,8 @@ namespace skWebShell
             m_url = new Uri(url);
             mWorkClient.OpenReadCompleted += MWorkClient_OpenReadCompleted;
             tcMain.Height = scMain.Panel2.Height - ssMain.Height;
+            sk_ops = ISkInteract.create();
+            wbMain.Url = new Uri(sk_ops.GetServUrl());
         }
 
         private void MWorkClient_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
@@ -95,11 +97,14 @@ namespace skWebShell
             if (lvReqList.SelectedItems.Count > 0)
             {
                 ListViewItem item = lvReqList.SelectedItems[0];
+                FapiaoEntity fp = ((FapiaoEntity)item.Tag);
+                if (fp == null) return;
+                if (sk_ops.InsertAmount(wbMain, fp.amount) == false && sk_ops.InsertTitle(wbMain, fp.fapiao_title) == false) return;
                 if (m_pending_printed_ids == null)
-                    m_pending_printed_ids = ((FapiaoEntity)item.Tag).id;
+                    m_pending_printed_ids = fp.id;
                 else
                 {
-                    m_pending_printed_ids = m_pending_printed_ids + "|" + ((FapiaoEntity)item.Tag).id;
+                    m_pending_printed_ids = m_pending_printed_ids + "|" + fp.id;
                 }
                 item.Remove();
                 //lvDoneList.Items.Add(item);
