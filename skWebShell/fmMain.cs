@@ -5,10 +5,8 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using wbOps;
 namespace skWebShell
@@ -29,9 +27,8 @@ namespace skWebShell
             String url = String.Format("{0:s}?pos_id={1:s}", system_const.service_url, ConfigurationManager.AppSettings["pos_id"]);
             m_url = new Uri(url);
             mWorkClient.OpenReadCompleted += MWorkClient_OpenReadCompleted;
-            tcMain.Height = scMain.Panel2.Height - ssMain.Height;
-            sk_ops = ISkInteract.create();
-            wbMain.Url = new Uri(sk_ops.GetServUrl());
+            tcMain.Height = scMain.Panel2.Height - fpOperation.Height;
+            sk_ops = ISkInteract.create(wbMain);
         }
 
         private void MWorkClient_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
@@ -58,7 +55,7 @@ namespace skWebShell
                 {
                     ListViewItem n = new ListViewItem(item.id);
                     n.Text = item.created_at;
-                    n.SubItems.Add(item.position + " " + item.amount);
+                    n.SubItems.Add(String.Format("台/单:{0:s} {1:s}元",item.position,item.amount));
                     n.SubItems.Add(item.fapiao_title);
                     n.Tag = item;
                     lvActReq.Items.Add(n);
@@ -83,12 +80,7 @@ namespace skWebShell
         
         private void scMain_Panel2_Resize(object sender, EventArgs e)
         {
-            tcMain.Height = scMain.Panel2.Height - ssMain.Height;
-        }
-
-        private void toolStripSplitButton1_Click(object sender, EventArgs e)
-        {
-            kickoff_rpt_retrieve();
+            tcMain.Height = scMain.Panel2.Height - fpOperation.Height;
         }
 
         private void lvActReq_DoubleClick(object sender, EventArgs e)
@@ -98,18 +90,51 @@ namespace skWebShell
             {
                 ListViewItem item = lvReqList.SelectedItems[0];
                 FapiaoEntity fp = ((FapiaoEntity)item.Tag);
-                if (fp == null) return;
-                if (sk_ops.InsertAmount(wbMain, fp.amount) == false && sk_ops.InsertTitle(wbMain, fp.fapiao_title) == false) return;
-                if (m_pending_printed_ids == null)
-                    m_pending_printed_ids = fp.id;
-                else
-                {
-                    m_pending_printed_ids = m_pending_printed_ids + "|" + fp.id;
+                if (!sk_ops.IsInFPWnd()) {
+                    MessageBox.Show("请进入发票打印页面");
+                    return;
                 }
-                item.Remove();
-                //lvDoneList.Items.Add(item);
-                kickoff_rpt_retrieve();
+
+                if (fp != null && sk_ops.InsertAmount(fp.amount) && sk_ops.InsertTitle(fp.fapiao_title))
+                {
+                    if (m_pending_printed_ids == null)
+                        m_pending_printed_ids = fp.id;
+                    else
+                    {
+                        m_pending_printed_ids = m_pending_printed_ids + "|" + fp.id;
+                    }
+                    item.Remove();
+                    lvDoneList.Items.Add(item);
+                    kickoff_rpt_retrieve();
+                    return;
+                }
             }
+            MessageBox.Show("数据异常，请重新选择数据");
+            return;
+        }
+
+
+        private void btRefresh_Click(object sender, EventArgs e)
+        {
+            kickoff_rpt_retrieve();
+        }
+
+        private void btTest_Click(object sender, EventArgs e)
+        {
+            if (sk_ops.IsInFPWnd())
+            {
+                sk_ops.InsertAmount("10");
+                sk_ops.InsertTitle("车到公司");
+            }
+            else
+            {
+                MessageBox.Show("请键入发票录入见面");
+            }
+        }
+
+        private void wbMain_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            this.Text = "爱发票复制打印 - " + wbMain.Document.Title;
         }
     }
 }

@@ -1,38 +1,57 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace wbOps
 {
     public abstract class ISkInteract {
-        public abstract String GetServUrl();
-        public abstract bool IsInFPWnd(System.Windows.Forms.WebBrowser wb);
-        public abstract bool InsertTitle(System.Windows.Forms.WebBrowser wb, String title);
-        public abstract bool InsertAmount(System.Windows.Forms.WebBrowser wb, String amount);
-        public static ISkInteract create() { return new SkNormalInteract(); }
+        public abstract bool IsInFPWnd();
+        public abstract bool InsertTitle(String title);
+        public abstract bool InsertAmount(String amount);
+        public static ISkInteract create(WebBrowser wb) { return new SkNormalInteract(wb); }
     }
     public class SkNormalInteract : ISkInteract
     {
-        override public string GetServUrl()
-        {
-            return "https://fp.gdltax.gov.cn";
+        WebBrowser wb;
+        HtmlWindow act_page = null;
+        public SkNormalInteract(WebBrowser _wb) {
+            wb = _wb;
+            wb.Url = new Uri("https://fp.gdltax.gov.cn");
         }
 
-        override public bool InsertAmount(WebBrowser wb, string amount)
+        override public bool InsertAmount(string amount)
         {
+            return SetField("je", amount);
+        }
+        override public bool InsertTitle(string title)
+        {
+            return SetField("fkfMc", title);
+        }
+
+        override public bool IsInFPWnd()
+        {
+            act_page = getFPWnd();
+            return act_page != null;
+        }
+
+        bool SetField(String field, String val) {
+            if (act_page != null)
+            {
+                HtmlElement ediv = act_page.Document.GetElementById(field);
+                if (ediv != null)
+                {
+                    ediv.InnerText = val;
+                    return true;
+                }
+            }
             return false;
         }
 
-        override public bool InsertTitle(WebBrowser wb, string title)
-        {
-            return false;
-        }
-
-        override public bool IsInFPWnd(WebBrowser wb)
-        {
-            return false;
+        HtmlWindow getFPWnd() {
+            for (int i = 0; i < wb.Document.Window.Frames.Count; i++) {
+                if (wb.Document.Window.Frames[i] != null && wb.Document.Window.Frames[i].Name == "nrq") {
+                    return wb.Document.Window.Frames[i];
+                }
+            }
+            return null;
         }
     }
 
