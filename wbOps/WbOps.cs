@@ -6,6 +6,7 @@ namespace wbOps
         public abstract bool IsInFPWnd();
         public abstract bool InsertTitle(String title);
         public abstract bool InsertAmount(String amount);
+        public abstract HtmlWindow getActPage();
         public static ISkInteract create(WebBrowser wb) { return new SkNormalInteract(wb); }
     }
     public class SkNormalInteract : ISkInteract
@@ -19,6 +20,8 @@ namespace wbOps
 
         override public bool InsertAmount(string amount)
         {
+
+            SetField("kpxmsm", "餐费");
             return SetField("je", amount);
         }
         override public bool InsertTitle(string title)
@@ -52,6 +55,11 @@ namespace wbOps
                 }
             }
             return null;
+        }
+
+        public override HtmlWindow getActPage()
+        {
+            return getFPWnd();
         }
     }
 

@@ -1,0 +1,79 @@
+function install_hook(elm){
+	$(elm).keyup(function(evt){
+		var $t = $(evt.currentTarget);
+		var tips = $t.data("tool");
+		if(tips == null){
+			tips = new ComboList($t);
+			$t.data("tool",tips);
+		}
+		tips.update($t.val());
+	});
+	$(elm).blur(function(evt){
+		var $t = $(evt.currentTarget);
+		var tips = $t.data("tool");
+		if(tips != null && !tips.focused()){
+			tips.remove();
+		}
+	});
+	$(elm).focus(function(evt){
+		var $t = $(evt.currentTarget);
+		var tips = $t.data("tool");
+		if(tips == null){
+			tips = new ComboList($t);
+			$t.data("tool",tips);
+		}
+		tips.update($t.val());
+	});
+}
+
+function ComboList($t){//construct function
+	var $parent = $t.parent();
+	var latest_key = "";
+	var focused = false;
+	var $con_div = $("<div>").attr("id",$t.attr("id") + "_combo").css("display","absolute").css("width",$t.css("width")).css("top",$t.css("height")).css("height",$t.css("height")*5).appendTo($parent);
+	$con = $("<ul>").appendTo($con_div).text("hello world");
+	$con.click(function(evt){
+		if($(evt.target).hasClass("list_item")){
+			$t.val($(evt.target).text());
+		}
+	});
+	$con_div.mouseenter(function(evt){
+		focused = true;
+	});
+	$con_div.mouseleave(function(evt){
+		focused = false;
+	});
+	this.remove = _remove;
+	this.update = _update;
+	this.focused = function(){return focused;}
+	
+	function _remove(){
+		$con_div.hide();
+	}
+	function _update(key){
+		if(key == "") return;
+		$con_div.show();
+		if(key == latest_key) return;
+		var cmp_url = "https://aifapiao.duapp.com/public/index.php/fppos/cmpname?key=" + key;
+		$.ajax({
+			type:"GET",
+			url:cmp_url,
+			jsonpCallback:'jsonCallback',
+			contentType:"application/json",
+			dataType:'jsonp',
+			success:function(json){
+				latest_key = key;
+				if(json != undefined){
+						$con.empty();
+						$.each(json,function(i,item){
+								$("<li>").text(item).addClass("list_item").appendTo($con);
+							});
+				}
+			},
+			error:function(e){
+				$con.text("error to " + e.statusText);
+			}
+			
+		});
+	}
+}

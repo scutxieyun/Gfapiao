@@ -28,8 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.scMain = new System.Windows.Forms.SplitContainer();
+            this.btShowPanel = new System.Windows.Forms.Button();
             this.wbMain = new System.Windows.Forms.WebBrowser();
+            this.plCrArea = new System.Windows.Forms.Panel();
+            this.pbScan = new System.Windows.Forms.PictureBox();
             this.tcMain = new System.Windows.Forms.TabControl();
             this.tpActive = new System.Windows.Forms.TabPage();
             this.lvActReq = new System.Windows.Forms.ListView();
@@ -37,16 +41,19 @@
             this.clBrief = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tpDone = new System.Windows.Forms.TabPage();
-            this.fpOperation = new System.Windows.Forms.FlowLayoutPanel();
-            this.btRefresh = new System.Windows.Forms.Button();
-            this.btTest = new System.Windows.Forms.Button();
             this.lvDoneList = new System.Windows.Forms.ListView();
             this.clDoneTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clDoneBrief = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clDoneTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.fpOperation = new System.Windows.Forms.FlowLayoutPanel();
+            this.btRefresh = new System.Windows.Forms.Button();
+            this.btTest = new System.Windows.Forms.Button();
+            this.tmDelayInject = new System.Windows.Forms.Timer(this.components);
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
             this.scMain.SuspendLayout();
+            this.plCrArea.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbScan)).BeginInit();
             this.tcMain.SuspendLayout();
             this.tpActive.SuspendLayout();
             this.tpDone.SuspendLayout();
@@ -62,18 +69,34 @@
             // 
             // scMain.Panel1
             // 
+            this.scMain.Panel1.Controls.Add(this.btShowPanel);
             this.scMain.Panel1.Controls.Add(this.wbMain);
             this.scMain.Panel1MinSize = 40;
             // 
             // scMain.Panel2
             // 
+            this.scMain.Panel2.Controls.Add(this.plCrArea);
             this.scMain.Panel2.Controls.Add(this.fpOperation);
-            this.scMain.Panel2.Controls.Add(this.tcMain);
             this.scMain.Panel2.Resize += new System.EventHandler(this.scMain_Panel2_Resize);
-            this.scMain.Size = new System.Drawing.Size(1058, 475);
-            this.scMain.SplitterDistance = 752;
+            this.scMain.Size = new System.Drawing.Size(1185, 559);
+            this.scMain.SplitterDistance = 907;
             this.scMain.SplitterWidth = 3;
             this.scMain.TabIndex = 0;
+            // 
+            // btShowPanel
+            // 
+            this.btShowPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btShowPanel.AutoEllipsis = true;
+            this.btShowPanel.BackColor = System.Drawing.Color.Silver;
+            this.btShowPanel.Location = new System.Drawing.Point(823, 3);
+            this.btShowPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.btShowPanel.Name = "btShowPanel";
+            this.btShowPanel.Size = new System.Drawing.Size(57, 23);
+            this.btShowPanel.TabIndex = 1;
+            this.btShowPanel.Text = "工具";
+            this.btShowPanel.UseVisualStyleBackColor = false;
+            this.btShowPanel.Visible = false;
+            this.btShowPanel.Click += new System.EventHandler(this.btShowPanel_Click);
             // 
             // wbMain
             // 
@@ -82,22 +105,42 @@
             this.wbMain.Margin = new System.Windows.Forms.Padding(2);
             this.wbMain.MinimumSize = new System.Drawing.Size(13, 13);
             this.wbMain.Name = "wbMain";
-            this.wbMain.Size = new System.Drawing.Size(752, 475);
+            this.wbMain.Size = new System.Drawing.Size(907, 559);
             this.wbMain.TabIndex = 0;
-            this.wbMain.Url = new System.Uri("https://fp.gdltax.gov.cn/", System.UriKind.Absolute);
+            this.wbMain.Url = new System.Uri("http://127.0.0.1/public/jstest.html", System.UriKind.Absolute);
             this.wbMain.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wbMain_DocumentCompleted);
+            // 
+            // plCrArea
+            // 
+            this.plCrArea.Controls.Add(this.pbScan);
+            this.plCrArea.Controls.Add(this.tcMain);
+            this.plCrArea.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.plCrArea.Location = new System.Drawing.Point(0, 35);
+            this.plCrArea.Name = "plCrArea";
+            this.plCrArea.Size = new System.Drawing.Size(275, 524);
+            this.plCrArea.TabIndex = 2;
+            // 
+            // pbScan
+            // 
+            this.pbScan.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pbScan.Location = new System.Drawing.Point(0, 354);
+            this.pbScan.Name = "pbScan";
+            this.pbScan.Size = new System.Drawing.Size(275, 170);
+            this.pbScan.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbScan.TabIndex = 1;
+            this.pbScan.TabStop = false;
             // 
             // tcMain
             // 
             this.tcMain.Alignment = System.Windows.Forms.TabAlignment.Bottom;
             this.tcMain.Controls.Add(this.tpActive);
             this.tcMain.Controls.Add(this.tpDone);
-            this.tcMain.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tcMain.Location = new System.Drawing.Point(0, 34);
+            this.tcMain.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tcMain.Location = new System.Drawing.Point(0, 0);
             this.tcMain.Margin = new System.Windows.Forms.Padding(2);
             this.tcMain.Name = "tcMain";
             this.tcMain.SelectedIndex = 0;
-            this.tcMain.Size = new System.Drawing.Size(303, 441);
+            this.tcMain.Size = new System.Drawing.Size(275, 349);
             this.tcMain.TabIndex = 0;
             // 
             // tpActive
@@ -107,7 +150,7 @@
             this.tpActive.Margin = new System.Windows.Forms.Padding(2);
             this.tpActive.Name = "tpActive";
             this.tpActive.Padding = new System.Windows.Forms.Padding(2);
-            this.tpActive.Size = new System.Drawing.Size(295, 415);
+            this.tpActive.Size = new System.Drawing.Size(267, 323);
             this.tpActive.TabIndex = 0;
             this.tpActive.Text = "待打印";
             this.tpActive.UseVisualStyleBackColor = true;
@@ -124,7 +167,7 @@
             this.lvActReq.Margin = new System.Windows.Forms.Padding(2);
             this.lvActReq.MultiSelect = false;
             this.lvActReq.Name = "lvActReq";
-            this.lvActReq.Size = new System.Drawing.Size(291, 411);
+            this.lvActReq.Size = new System.Drawing.Size(263, 319);
             this.lvActReq.TabIndex = 0;
             this.lvActReq.UseCompatibleStateImageBehavior = false;
             this.lvActReq.View = System.Windows.Forms.View.Details;
@@ -132,9 +175,8 @@
             // 
             // clTime
             // 
-            this.clTime.DisplayIndex = 2;
             this.clTime.Text = "时间";
-            this.clTime.Width = 69;
+            this.clTime.Width = 93;
             // 
             // clBrief
             // 
@@ -144,7 +186,7 @@
             // clTitle
             // 
             this.clTitle.Text = "抬头";
-            this.clTitle.Width = 100;
+            this.clTitle.Width = 154;
             // 
             // tpDone
             // 
@@ -153,40 +195,10 @@
             this.tpDone.Margin = new System.Windows.Forms.Padding(2);
             this.tpDone.Name = "tpDone";
             this.tpDone.Padding = new System.Windows.Forms.Padding(2);
-            this.tpDone.Size = new System.Drawing.Size(295, 415);
+            this.tpDone.Size = new System.Drawing.Size(266, 323);
             this.tpDone.TabIndex = 1;
             this.tpDone.Text = "已打印";
             this.tpDone.UseVisualStyleBackColor = true;
-            // 
-            // fpOperation
-            // 
-            this.fpOperation.Controls.Add(this.btRefresh);
-            this.fpOperation.Controls.Add(this.btTest);
-            this.fpOperation.Dock = System.Windows.Forms.DockStyle.Top;
-            this.fpOperation.Location = new System.Drawing.Point(0, 0);
-            this.fpOperation.Name = "fpOperation";
-            this.fpOperation.Size = new System.Drawing.Size(303, 29);
-            this.fpOperation.TabIndex = 1;
-            // 
-            // btRefresh
-            // 
-            this.btRefresh.Location = new System.Drawing.Point(3, 3);
-            this.btRefresh.Name = "btRefresh";
-            this.btRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btRefresh.TabIndex = 0;
-            this.btRefresh.Text = "刷新";
-            this.btRefresh.UseVisualStyleBackColor = true;
-            this.btRefresh.Click += new System.EventHandler(this.btRefresh_Click);
-            // 
-            // btTest
-            // 
-            this.btTest.Location = new System.Drawing.Point(84, 3);
-            this.btTest.Name = "btTest";
-            this.btTest.Size = new System.Drawing.Size(75, 23);
-            this.btTest.TabIndex = 1;
-            this.btTest.Text = "测试";
-            this.btTest.UseVisualStyleBackColor = true;
-            this.btTest.Click += new System.EventHandler(this.btTest_Click);
             // 
             // lvDoneList
             // 
@@ -197,7 +209,7 @@
             this.lvDoneList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvDoneList.Location = new System.Drawing.Point(2, 2);
             this.lvDoneList.Name = "lvDoneList";
-            this.lvDoneList.Size = new System.Drawing.Size(291, 411);
+            this.lvDoneList.Size = new System.Drawing.Size(262, 319);
             this.lvDoneList.TabIndex = 0;
             this.lvDoneList.UseCompatibleStateImageBehavior = false;
             this.lvDoneList.View = System.Windows.Forms.View.Details;
@@ -217,18 +229,56 @@
             this.clDoneTitle.Text = "抬头";
             this.clDoneTitle.Width = 94;
             // 
+            // fpOperation
+            // 
+            this.fpOperation.Controls.Add(this.btRefresh);
+            this.fpOperation.Controls.Add(this.btTest);
+            this.fpOperation.Dock = System.Windows.Forms.DockStyle.Top;
+            this.fpOperation.Location = new System.Drawing.Point(0, 0);
+            this.fpOperation.Name = "fpOperation";
+            this.fpOperation.Size = new System.Drawing.Size(275, 29);
+            this.fpOperation.TabIndex = 1;
+            // 
+            // btRefresh
+            // 
+            this.btRefresh.Location = new System.Drawing.Point(3, 3);
+            this.btRefresh.Name = "btRefresh";
+            this.btRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btRefresh.TabIndex = 0;
+            this.btRefresh.Text = "刷新";
+            this.btRefresh.UseVisualStyleBackColor = true;
+            this.btRefresh.Click += new System.EventHandler(this.btRefresh_Click);
+            // 
+            // btTest
+            // 
+            this.btTest.Location = new System.Drawing.Point(84, 3);
+            this.btTest.Name = "btTest";
+            this.btTest.Size = new System.Drawing.Size(75, 23);
+            this.btTest.TabIndex = 1;
+            this.btTest.Text = "隐藏";
+            this.btTest.UseVisualStyleBackColor = true;
+            this.btTest.Click += new System.EventHandler(this.btTest_Click);
+            // 
+            // tmDelayInject
+            // 
+            this.tmDelayInject.Interval = 2000;
+            this.tmDelayInject.Tick += new System.EventHandler(this.tmDelayInject_Tick);
+            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1058, 475);
+            this.ClientSize = new System.Drawing.Size(1185, 559);
             this.Controls.Add(this.scMain);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "fmMain";
             this.Text = "爱发票复制打印";
+            this.Load += new System.EventHandler(this.fmMain_Load);
             this.scMain.Panel1.ResumeLayout(false);
             this.scMain.Panel2.ResumeLayout(false);
             this.scMain.ResumeLayout(false);
+            this.plCrArea.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbScan)).EndInit();
             this.tcMain.ResumeLayout(false);
             this.tpActive.ResumeLayout(false);
             this.tpDone.ResumeLayout(false);
@@ -255,6 +305,10 @@
         private System.Windows.Forms.ColumnHeader clDoneTime;
         private System.Windows.Forms.ColumnHeader clDoneBrief;
         private System.Windows.Forms.ColumnHeader clDoneTitle;
+        private System.Windows.Forms.Button btShowPanel;
+        private System.Windows.Forms.Timer tmDelayInject;
+        private System.Windows.Forms.Panel plCrArea;
+        private System.Windows.Forms.PictureBox pbScan;
     }
 }
 

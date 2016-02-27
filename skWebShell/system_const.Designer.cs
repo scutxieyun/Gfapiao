@@ -61,11 +61,113 @@ namespace skWebShell {
         }
         
         /// <summary>
-        ///   查找类似 http://aifapiao.duapp.com/public/index.php/fppos 的本地化字符串。
+        ///   查找类似 function install_hook(elm){
+        ///	$(elm).keyup(function(evt){
+        ///		var $t = $(evt.currentTarget);
+        ///		var tips = $t.data(&quot;tool&quot;);
+        ///		if(tips == null){
+        ///			tips = new ComboList($t);
+        ///			$t.data(&quot;tool&quot;,tips);
+        ///		}
+        ///		tips.update($t.val());
+        ///	});
+        ///	$(elm).blur(function(evt){
+        ///		var $t = $(evt.currentTarget);
+        ///		var tips = $t.data(&quot;tool&quot;);
+        ///		if(tips != null &amp;&amp; !tips.focused()){
+        ///			tips.remove();
+        ///		}
+        ///	});
+        ///	$(elm).focus(function(evt){
+        ///		var $t = $(evt.currentTarget);
+        ///		var tips = $t.data(&quot;tool&quot;);
+        ///		if(tips == nu [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string cmp_idx {
+            get {
+                return ResourceManager.GetString("cmp_idx", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ul li.list_item {
+        ///  list-style-type:none;
+        ///} 的本地化字符串。
+        /// </summary>
+        internal static string customized_css {
+            get {
+                return ResourceManager.GetString("customized_css", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 /*!
+        /// * jQuery JavaScript Library v1.11.1
+        /// * http://jquery.com/
+        /// *
+        /// * Includes Sizzle.js
+        /// * http://sizzlejs.com/
+        /// *
+        /// * Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors
+        /// * Released under the MIT license
+        /// * http://jquery.org/license
+        /// *
+        /// * Date: 2014-05-01T17:42Z
+        /// */
+        ///
+        ///(function (global, factory) {
+        ///
+        ///    if (typeof module === &quot;object&quot; &amp;&amp; typeof module.exports === &quot;object&quot;) {
+        ///        // For CommonJS and CommonJS-like environments where a proper window is present,
+        ///        // exe [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string jquery_2_1_3_min {
+            get {
+                return ResourceManager.GetString("jquery_2_1_3_min", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 function install_hook(){
+        ///	var mc = document.getElementById(&quot;fkfMc&quot;);
+        ///	if (mc != null){
+        ///		var onkeyup = mc.onkeyup;
+        ///		mc.onkeyup = function(evt){onkeyup(evt);alert(&quot;OK&quot;)};
+        ///	}
+        ///} 的本地化字符串。
+        /// </summary>
+        internal static string new_plugin_mc {
+            get {
+                return ResourceManager.GetString("new_plugin_mc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 http://127.0.0.1/public/jstest.html 的本地化字符串。
         /// </summary>
         internal static string service_url {
             get {
                 return ResourceManager.GetString("service_url", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 http://aifapiao.duapp.com/public/index.php/fppos 的本地化字符串。
+        /// </summary>
+        internal static string service_url_1 {
+            get {
+                return ResourceManager.GetString("service_url_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 function install_hook(){
+        ///	alert(&quot;Test&quot;);
+        ///} 的本地化字符串。
+        /// </summary>
+        internal static string test_js {
+            get {
+                return ResourceManager.GetString("test_js", resourceCulture);
             }
         }
     }

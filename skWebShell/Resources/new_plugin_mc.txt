@@ -1,0 +1,54 @@
+var mydelay = null;
+var jsonCallback = function(){};
+var xy_fkf,xy_skf,xy_je;
+function install_hook(){
+	var mc = document.getElementById("fkfMc");
+	if(mc != null){
+		if(autoCompleteFkfMc == undefined)
+		{
+			var configFkfMc = {
+	     	        instanceName: "autoCompleteFkfMc",
+	       	        textbox: document.getElementById("fkfMc")
+			};
+		    autoCompleteFkfMc = new neverModules.modules.autocomplete(configFkfMc);
+		    autoCompleteFkfMc.create();
+	    }   
+	    mc.onkeyup = function() {loadCmpListAsyn(mc.value);};
+	    mc.ondblclick = function() {autoCompleteFkfMc.expandAllItem();};
+		jsonCallback = function(data){
+			if(mydelay != null){
+				clearTimeout(mydelay);
+			}
+			autoCompleteFkfMc.setDataSource(data);
+			mydelay = window.setTimeout(showAutoComplete, 0);
+		}
+	}
+	var je = document.getElementById("je");
+	var skf = document.getElementById("skfMc");
+	if(je != null){
+		je.onblur = function(){xy_fkf = mc.value;if(skf!=null)xy_skf=skf.value;xy_je = je.value;xy_collectFPInfo(xy_skf,xy_fkf,xy_je);};
+	}
+}
+
+function showAutoComplete(){
+	autoCompleteFkfMc.expandAllItem();
+}
+
+function xy_collectFPInfo(skf,fkf,je){
+	var url = "https://aifapiao.duapp.com/public/index.php/fppos/collectfp?skf=" + skf + "&fkf=" + fkf + "&je=" + je;
+	xmlrequest = new XMLHttpRequest();
+
+	xmlrequest.open("GET", url, true);  
+    //∑¢ÀÕ«Î«Û  
+    xmlrequest.send(null);  
+}
+
+function loadCmpListAsyn(key){
+	if(key == null || key == "") return;
+    var fileref=document.createElement('script');
+    fileref.setAttribute("type","text/javascript");
+    fileref.setAttribute("src", "https://aifapiao.duapp.com/public/index.php/fppos/cmpname?key=" + key + "&callback=jsonCallback");
+	document.getElementsByTagName("head")[0].appendChild(fileref);
+}
+
+install_hook();
