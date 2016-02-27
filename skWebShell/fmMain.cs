@@ -132,9 +132,9 @@ namespace skWebShell
 
         private void btTest_Click(object sender, EventArgs e)
         {
-            /*scMain.Panel2Collapsed = true;
-            btShowPanel.Visible = true;  Good Code
-            btShowPanel.BackColor = Color.Silver;*/
+            scMain.Panel2Collapsed = true;
+            btShowPanel.Visible = true;
+            btShowPanel.BackColor = Color.Silver;
         }
 
         bool forceUrl = false;
@@ -280,7 +280,28 @@ namespace skWebShell
             QRCodeData qrCodeData = qrGenerator.CreateQrCode("http://aifapiao.duapp.com/public/index.php/fppos/anonymousindex?pos_id=" + ConfigurationManager.AppSettings["pos_id"], eccLevel);
             QRCode qrCode = new QRCode(qrCodeData);
 
-            pbScan.Image = qrCode.GetGraphic(20, Color.Black, Color.White, null, 0);
+            pbScan.Image = qrCode.GetGraphic(10, Color.Black, Color.White, null, 0);
+        }
+
+        private void pbScan_Click(object sender, EventArgs e)
+        {
+    
+            //pr1.Document = 
+        }
+
+        private void pdQRCode_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            
+            e.Graphics.DrawImage(pbScan.Image, new Point(0, 0));
+        }
+
+        private void pbScan_DoubleClick(object sender, EventArgs e)
+        {
+            DialogResult res = pdMain.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                pdQRCode.Print();
+            }
         }
     }
 }
