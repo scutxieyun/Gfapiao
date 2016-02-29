@@ -303,5 +303,22 @@ namespace skWebShell
                 pdQRCode.Print();
             }
         }
+
+        private void tmPollRpt_Tick(object sender, EventArgs e)
+        {
+            kickoff_rpt_retrieve();
+        }
+
+        private void lvActReq_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                lvActReq_DoubleClick(sender, e);
+            }
+            if (e.KeyChar == (char)Keys.Delete)
+            {
+                //tsItemDelete_Click(sender, e);
+            }
+        }
     }
 }
