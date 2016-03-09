@@ -101,6 +101,15 @@ namespace skWebShell {
         }
         
         /// <summary>
+        ///   查找类似 http://aifapiao.duapp.com/public/index.php 的本地化字符串。
+        /// </summary>
+        internal static string entry {
+            get {
+                return ResourceManager.GetString("entry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 /*!
         /// * jQuery JavaScript Library v1.11.1
         /// * http://jquery.com/
@@ -128,35 +137,26 @@ namespace skWebShell {
         }
         
         /// <summary>
-        ///   查找类似 function install_hook(){
+        ///   查找类似 var mydelay = null;
+        ///var jsonCallback = function(){};
+        ///var xy_fkf,xy_skf,xy_je;
+        ///function install_hook(){
         ///	var mc = document.getElementById(&quot;fkfMc&quot;);
-        ///	if (mc != null){
-        ///		var onkeyup = mc.onkeyup;
-        ///		mc.onkeyup = function(evt){onkeyup(evt);alert(&quot;OK&quot;)};
-        ///	}
-        ///} 的本地化字符串。
+        ///	if(mc != null){
+        ///		if(autoCompleteFkfMc == undefined)
+        ///		{
+        ///			var configFkfMc = {
+        ///	     	        instanceName: &quot;autoCompleteFkfMc&quot;,
+        ///	       	        textbox: document.getElementById(&quot;fkfMc&quot;)
+        ///			};
+        ///		    autoCompleteFkfMc = new neverModules.modules.autocomplete(configFkfMc);
+        ///		    autoCompleteFkfMc.create();
+        ///	    }   
+        ///	    mc.onkeyup = function() {lo [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string new_plugin_mc {
             get {
                 return ResourceManager.GetString("new_plugin_mc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 http://127.0.0.1/public/jstest.html 的本地化字符串。
-        /// </summary>
-        internal static string service_url {
-            get {
-                return ResourceManager.GetString("service_url", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 http://aifapiao.duapp.com/public/index.php/fppos 的本地化字符串。
-        /// </summary>
-        internal static string service_url_1 {
-            get {
-                return ResourceManager.GetString("service_url_1", resourceCulture);
             }
         }
         
@@ -168,6 +168,15 @@ namespace skWebShell {
         internal static string test_js {
             get {
                 return ResourceManager.GetString("test_js", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 1.01 的本地化字符串。
+        /// </summary>
+        internal static string version {
+            get {
+                return ResourceManager.GetString("version", resourceCulture);
             }
         }
     }

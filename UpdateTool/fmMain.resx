@@ -117,26 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="cmp_idx" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\cmp_idx.js.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
-  </data>
-  <data name="customized_css" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\customized_css.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
-  </data>
-  <data name="entry" xml:space="preserve">
-    <value>http://aifapiao.duapp.com/public/index.php</value>
-  </data>
-  <data name="jquery_2_1_3_min" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\jquery-2.1.3.min.js;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
-  </data>
-  <data name="new_plugin_mc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\new_plugin_mc.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
-  </data>
-  <data name="test_js" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\test_js.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
-  </data>
-  <data name="version" xml:space="preserve">
-    <value>1.01</value>
-  </data>
 </root>

@@ -29,7 +29,7 @@ namespace skWebShell
         public fmMain()
         {
             InitializeComponent();
-            String url = String.Format("{0:s}?pos_id={1:s}", system_const.service_url_1, ConfigurationManager.AppSettings["pos_id"]);
+            String url = String.Format("{0:s}/fppos/index?pos_id={1:s}", system_const.entry, ConfigurationManager.AppSettings["pos_id"]);
             m_url = new Uri(url);
             //mWorkClient.Op
             mWorkClient.OpenReadCompleted += MWorkClient_OpenReadCompleted;
@@ -90,7 +90,7 @@ namespace skWebShell
         private void scMain_Panel2_Resize(object sender, EventArgs e)
         {
             this.plCrArea.Height = scMain.Panel2.Height - fpOperation.Height;
-            tcMain.Height = this.plCrArea.Height - this.pbScan.Height;
+            tcMain.Height = this.plCrArea.Height - this.plStoreInfo.Height;
             //tcMain.Height = scMain.Panel2.Height - fpOperation.Height;
         }
 
@@ -124,6 +124,30 @@ namespace skWebShell
             return;
         }
 
+        private void lvActReq_Delete_Item_Action(object sender, EventArgs e) {
+            ListView lvReqList = (ListView)sender;
+            if (lvReqList.SelectedItems.Count > 0)
+            {
+                ListViewItem item = lvReqList.SelectedItems[0];
+                FapiaoEntity fp = ((FapiaoEntity)item.Tag);
+                if(MessageBox.Show("确认拒绝该请求","拒绝打印请求",MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    if (m_pending_printed_ids == null)
+                        m_pending_printed_ids = fp.id + ",d";
+                    else
+                    {
+                        m_pending_printed_ids = m_pending_printed_ids + "|" + fp.id+",d";
+                    }
+                    item.Remove();
+                    fp.status = "rejected";
+                    lvDoneList.Items.Add(item);
+                    item.BackColor = Color.Red;
+                    kickoff_rpt_retrieve();
+                    return;
+                }
+            }
+            MessageBox.Show("数据异常，请重新选择数据");
+        }
 
         private void btRefresh_Click(object sender, EventArgs e)
         {
@@ -141,7 +165,7 @@ namespace skWebShell
         private void wbMain_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             doc_loaded_cnt++;
-            this.Text = "爱发票辅助打印 - " + wbMain.Document.Title;
+            this.Text = "发票易 - " + wbMain.Document.Title;
             if (e.Url.ToString().Contains("https://fp.gdltax.gov.cn/fpzx/jsp/fpzx/common/transition.jsp")) {
                 /*if (forceUrl == false)
                 {
@@ -270,6 +294,7 @@ namespace skWebShell
         private void fmMain_Load(object sender, EventArgs e)
         {
             renderQRCode();
+            this.llStoreURL.Links.Add(0, 4, String.Format("{0:s}/fpmgt/index?pos_id={1:s}",system_const.entry,ConfigurationManager.AppSettings["pos_id"].Trim()));
         }
 
         private void renderQRCode()
@@ -277,7 +302,7 @@ namespace skWebShell
             string level = "M";
             QRCodeGenerator.ECCLevel eccLevel = (QRCodeGenerator.ECCLevel)(level == "L" ? 0 : level == "M" ? 1 : level == "Q" ? 2 : 3);
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode("http://aifapiao.duapp.com/public/index.php/fppos/anonymousindex?pos_id=" + ConfigurationManager.AppSettings["pos_id"], eccLevel);
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(String.Format("{0:s}/fppos/anonymousindex?pos_id={1:s}",system_const.entry,ConfigurationManager.AppSettings["pos_id"]), eccLevel);
             QRCode qrCode = new QRCode(qrCodeData);
 
             pbScan.Image = qrCode.GetGraphic(10, Color.Black, Color.White, null, 0);
@@ -315,10 +340,23 @@ namespace skWebShell
             {
                 lvActReq_DoubleClick(sender, e);
             }
-            if (e.KeyChar == (char)Keys.Delete)
+            if (e.KeyChar == (char)Keys.Delete || e.KeyChar == (char)Keys.D)
             {
-                //tsItemDelete_Click(sender, e);
+                lvActReq_Delete_Item_Action(sender, e);
             }
+        }
+
+        private void lvActReq_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            Rectangle r = new Rectangle(e.Bounds.Location, new Size(e.Bounds.Width, e.Bounds.Height + 20));
+            //e.Graphics.DrawImage(e.Item.ImageList.Images[e.Item.ImageIndex], r);
+            e.Graphics.DrawString(e.Item.Text, e.Item.Font, new SolidBrush(e.Item.ForeColor), new Point(e.Bounds.X + 10, e.Bounds.Y + 30));
+        }
+
+        private void llStoreURL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string targetUrl = e.Link.LinkData as string;
+            System.Diagnostics.Process.Start(targetUrl);
         }
     }
 }

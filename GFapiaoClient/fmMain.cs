@@ -27,7 +27,7 @@ namespace GFapiaoClient
         {
             WndInteract.Win32Locator.KickOffEnumWindows();
             InitializeComponent();
-            String url = String.Format("{0:s}?pos_id={1:s}", system_const.service_url, ConfigurationManager.AppSettings["pos_id"]);
+            String url = String.Format(@"http://{0:s}/fppos/index?pos_id={1:s}", system_const.entry,ConfigurationManager.AppSettings["pos_id"]);
             m_url = new Uri(url);
             mWorkClient.OpenReadCompleted += MWorkClient_OpenReadCompleted;
 

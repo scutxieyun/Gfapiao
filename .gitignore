@@ -11,3 +11,6 @@ wbOps/bin/**
 wbOps/obj/**
 RoomsLib/bin/**
 RoomsLib/obj/**
+bin/**
+UpdateTool/obj/**
+UpdateTool/bin/**

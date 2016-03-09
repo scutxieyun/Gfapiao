@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{05F9D0A9-A046-4940-AFB1-CBB67472DB5D}</ProjectGuid>
+    <ProjectGuid>{FECE6C14-4F1E-499A-8E52-EF3585E16D7A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>skWebShell</RootNamespace>
-    <AssemblyName>skWebShell</AssemblyName>
+    <RootNamespace>UpdateTool</RootNamespace>
+    <AssemblyName>UpdateTool</AssemblyName>
     <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -33,26 +32,19 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>invoice_128px_1169032_easyicon.net.ico</ApplicationIcon>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="QRCoder">
-      <HintPath>..\Tool\QRCoder.dll</HintPath>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\Tool\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="UnityEngine">
-      <HintPath>..\Tool\UnityEngine.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FapiaoEntity.cs" />
     <Compile Include="fmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,11 +53,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="system_const.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>system_const.resx</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="fmMain.resx">
       <DependentUpon>fmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -79,10 +66,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="system_const.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>system_const.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -92,44 +76,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\wbOps\wbOps.csproj">
-      <Project>{f8623f39-afe5-4641-bac1-9238f4e6c21e}</Project>
-      <Name>wbOps</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\jquery-2.1.3.min.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\customized_css.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\cmp_idx.js.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="MSHTML">
-      <Guid>{3050F1C5-98B5-11CF-BB82-00AA00BDCE0B}</Guid>
-      <VersionMajor>4</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\test_js.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\new_plugin_mc.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="invoice_128px_1169032_easyicon.net.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

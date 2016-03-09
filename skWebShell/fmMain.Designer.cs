@@ -33,6 +33,8 @@
             this.btShowPanel = new System.Windows.Forms.Button();
             this.wbMain = new System.Windows.Forms.WebBrowser();
             this.plCrArea = new System.Windows.Forms.Panel();
+            this.plStoreInfo = new System.Windows.Forms.Panel();
+            this.llStoreURL = new System.Windows.Forms.LinkLabel();
             this.pbScan = new System.Windows.Forms.PictureBox();
             this.tcMain = new System.Windows.Forms.TabControl();
             this.tpActive = new System.Windows.Forms.TabPage();
@@ -56,6 +58,7 @@
             this.scMain.Panel2.SuspendLayout();
             this.scMain.SuspendLayout();
             this.plCrArea.SuspendLayout();
+            this.plStoreInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbScan)).BeginInit();
             this.tcMain.SuspendLayout();
             this.tpActive.SuspendLayout();
@@ -67,7 +70,7 @@
             // 
             this.scMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scMain.Location = new System.Drawing.Point(0, 0);
-            this.scMain.Margin = new System.Windows.Forms.Padding(2);
+            this.scMain.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.scMain.Name = "scMain";
             // 
             // scMain.Panel1
@@ -82,7 +85,7 @@
             this.scMain.Panel2.Controls.Add(this.fpOperation);
             this.scMain.Panel2.Resize += new System.EventHandler(this.scMain_Panel2_Resize);
             this.scMain.Size = new System.Drawing.Size(1043, 559);
-            this.scMain.SplitterDistance = 797;
+            this.scMain.SplitterDistance = 796;
             this.scMain.SplitterWidth = 3;
             this.scMain.TabIndex = 0;
             // 
@@ -91,8 +94,8 @@
             this.btShowPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btShowPanel.AutoEllipsis = true;
             this.btShowPanel.BackColor = System.Drawing.Color.Silver;
-            this.btShowPanel.Location = new System.Drawing.Point(713, 3);
-            this.btShowPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.btShowPanel.Location = new System.Drawing.Point(712, 3);
+            this.btShowPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btShowPanel.Name = "btShowPanel";
             this.btShowPanel.Size = new System.Drawing.Size(57, 23);
             this.btShowPanel.TabIndex = 1;
@@ -105,30 +108,53 @@
             // 
             this.wbMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.wbMain.Location = new System.Drawing.Point(0, 0);
-            this.wbMain.Margin = new System.Windows.Forms.Padding(2);
+            this.wbMain.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.wbMain.MinimumSize = new System.Drawing.Size(13, 13);
             this.wbMain.Name = "wbMain";
-            this.wbMain.Size = new System.Drawing.Size(797, 559);
+            this.wbMain.Size = new System.Drawing.Size(796, 559);
             this.wbMain.TabIndex = 0;
             this.wbMain.Url = new System.Uri("http://127.0.0.1/public/jstest.html", System.UriKind.Absolute);
             this.wbMain.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wbMain_DocumentCompleted);
             // 
             // plCrArea
             // 
-            this.plCrArea.Controls.Add(this.pbScan);
+            this.plCrArea.Controls.Add(this.plStoreInfo);
             this.plCrArea.Controls.Add(this.tcMain);
             this.plCrArea.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.plCrArea.Location = new System.Drawing.Point(0, 35);
             this.plCrArea.Name = "plCrArea";
-            this.plCrArea.Size = new System.Drawing.Size(243, 524);
+            this.plCrArea.Size = new System.Drawing.Size(244, 524);
             this.plCrArea.TabIndex = 2;
+            // 
+            // plStoreInfo
+            // 
+            this.plStoreInfo.Controls.Add(this.llStoreURL);
+            this.plStoreInfo.Controls.Add(this.pbScan);
+            this.plStoreInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.plStoreInfo.Location = new System.Drawing.Point(0, 360);
+            this.plStoreInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.plStoreInfo.Name = "plStoreInfo";
+            this.plStoreInfo.Size = new System.Drawing.Size(244, 164);
+            this.plStoreInfo.TabIndex = 2;
+            // 
+            // llStoreURL
+            // 
+            this.llStoreURL.AutoSize = true;
+            this.llStoreURL.Location = new System.Drawing.Point(12, 8);
+            this.llStoreURL.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.llStoreURL.Name = "llStoreURL";
+            this.llStoreURL.Size = new System.Drawing.Size(53, 12);
+            this.llStoreURL.TabIndex = 2;
+            this.llStoreURL.TabStop = true;
+            this.llStoreURL.Text = "我的信息";
+            this.llStoreURL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llStoreURL_LinkClicked);
             // 
             // pbScan
             // 
             this.pbScan.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pbScan.Location = new System.Drawing.Point(0, 354);
+            this.pbScan.Location = new System.Drawing.Point(0, 23);
             this.pbScan.Name = "pbScan";
-            this.pbScan.Size = new System.Drawing.Size(243, 170);
+            this.pbScan.Size = new System.Drawing.Size(244, 141);
             this.pbScan.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbScan.TabIndex = 1;
             this.pbScan.TabStop = false;
@@ -142,20 +168,20 @@
             this.tcMain.Controls.Add(this.tpDone);
             this.tcMain.Dock = System.Windows.Forms.DockStyle.Top;
             this.tcMain.Location = new System.Drawing.Point(0, 0);
-            this.tcMain.Margin = new System.Windows.Forms.Padding(2);
+            this.tcMain.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tcMain.Name = "tcMain";
             this.tcMain.SelectedIndex = 0;
-            this.tcMain.Size = new System.Drawing.Size(243, 349);
+            this.tcMain.Size = new System.Drawing.Size(244, 349);
             this.tcMain.TabIndex = 0;
             // 
             // tpActive
             // 
             this.tpActive.Controls.Add(this.lvActReq);
             this.tpActive.Location = new System.Drawing.Point(4, 4);
-            this.tpActive.Margin = new System.Windows.Forms.Padding(2);
+            this.tpActive.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tpActive.Name = "tpActive";
-            this.tpActive.Padding = new System.Windows.Forms.Padding(2);
-            this.tpActive.Size = new System.Drawing.Size(235, 323);
+            this.tpActive.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tpActive.Size = new System.Drawing.Size(236, 323);
             this.tpActive.TabIndex = 0;
             this.tpActive.Text = "待打印";
             this.tpActive.UseVisualStyleBackColor = true;
@@ -169,39 +195,43 @@
             this.lvActReq.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvActReq.FullRowSelect = true;
             this.lvActReq.Location = new System.Drawing.Point(2, 2);
-            this.lvActReq.Margin = new System.Windows.Forms.Padding(2);
+            this.lvActReq.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lvActReq.MultiSelect = false;
             this.lvActReq.Name = "lvActReq";
-            this.lvActReq.Size = new System.Drawing.Size(231, 319);
+            this.lvActReq.Size = new System.Drawing.Size(232, 319);
             this.lvActReq.TabIndex = 0;
             this.lvActReq.UseCompatibleStateImageBehavior = false;
             this.lvActReq.View = System.Windows.Forms.View.Details;
+            this.lvActReq.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lvActReq_DrawItem);
             this.lvActReq.DoubleClick += new System.EventHandler(this.lvActReq_DoubleClick);
             this.lvActReq.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lvActReq_KeyPress);
             // 
             // clTime
             // 
+            this.clTime.DisplayIndex = 2;
             this.clTime.Text = "时间";
             this.clTime.Width = 93;
             // 
             // clBrief
             // 
+            this.clBrief.DisplayIndex = 0;
             this.clBrief.Text = "交易信息";
             this.clBrief.Width = 96;
             // 
             // clTitle
             // 
+            this.clTitle.DisplayIndex = 1;
             this.clTitle.Text = "抬头";
-            this.clTitle.Width = 154;
+            this.clTitle.Width = 148;
             // 
             // tpDone
             // 
             this.tpDone.Controls.Add(this.lvDoneList);
             this.tpDone.Location = new System.Drawing.Point(4, 4);
-            this.tpDone.Margin = new System.Windows.Forms.Padding(2);
+            this.tpDone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tpDone.Name = "tpDone";
-            this.tpDone.Padding = new System.Windows.Forms.Padding(2);
-            this.tpDone.Size = new System.Drawing.Size(135, 323);
+            this.tpDone.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tpDone.Size = new System.Drawing.Size(235, 323);
             this.tpDone.TabIndex = 1;
             this.tpDone.Text = "已打印";
             this.tpDone.UseVisualStyleBackColor = true;
@@ -215,7 +245,7 @@
             this.lvDoneList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvDoneList.Location = new System.Drawing.Point(2, 2);
             this.lvDoneList.Name = "lvDoneList";
-            this.lvDoneList.Size = new System.Drawing.Size(131, 319);
+            this.lvDoneList.Size = new System.Drawing.Size(231, 319);
             this.lvDoneList.TabIndex = 0;
             this.lvDoneList.UseCompatibleStateImageBehavior = false;
             this.lvDoneList.View = System.Windows.Forms.View.Details;
@@ -242,7 +272,7 @@
             this.fpOperation.Dock = System.Windows.Forms.DockStyle.Top;
             this.fpOperation.Location = new System.Drawing.Point(0, 0);
             this.fpOperation.Name = "fpOperation";
-            this.fpOperation.Size = new System.Drawing.Size(243, 29);
+            this.fpOperation.Size = new System.Drawing.Size(244, 29);
             this.fpOperation.TabIndex = 1;
             // 
             // btRefresh
@@ -287,6 +317,7 @@
             // 
             // tmPollRpt
             // 
+            this.tmPollRpt.Enabled = true;
             this.tmPollRpt.Interval = 30000;
             this.tmPollRpt.Tick += new System.EventHandler(this.tmPollRpt_Tick);
             // 
@@ -296,14 +327,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1043, 559);
             this.Controls.Add(this.scMain);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "fmMain";
-            this.Text = "爱发票复制打印";
+            this.Text = "发票易";
             this.Load += new System.EventHandler(this.fmMain_Load);
             this.scMain.Panel1.ResumeLayout(false);
             this.scMain.Panel2.ResumeLayout(false);
             this.scMain.ResumeLayout(false);
             this.plCrArea.ResumeLayout(false);
+            this.plStoreInfo.ResumeLayout(false);
+            this.plStoreInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbScan)).EndInit();
             this.tcMain.ResumeLayout(false);
             this.tpActive.ResumeLayout(false);
@@ -338,6 +371,8 @@
         private System.Drawing.Printing.PrintDocument pdQRCode;
         private System.Windows.Forms.PrintDialog pdMain;
         private System.Windows.Forms.Timer tmPollRpt;
+        private System.Windows.Forms.Panel plStoreInfo;
+        private System.Windows.Forms.LinkLabel llStoreURL;
     }
 }
 
