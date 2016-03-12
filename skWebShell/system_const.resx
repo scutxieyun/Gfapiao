@@ -125,7 +125,7 @@
     <value>Resources\customized_css.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
   <data name="entry" xml:space="preserve">
-    <value>http://127.0.0.1/public/index.php</value>
+    <value>http://aifapiao.duapp.com/public/index.php</value>
   </data>
   <data name="entry2" xml:space="preserve">
     <value>http://aifapiao.duapp.com/public/index.php</value>
@@ -143,6 +143,6 @@
     <value>Resources\test_js.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
   <data name="version" xml:space="preserve">
-    <value>1.03</value>
+    <value>1.04</value>
   </data>
 </root>

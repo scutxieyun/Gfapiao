@@ -4,6 +4,7 @@ using System.Net;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
+using System.Net.NetworkInformation;
 namespace skWebShell
 {
     static class Program
@@ -18,6 +19,11 @@ namespace skWebShell
             String init_data = null;
             try
             {
+
+                if (NetworkInterface.GetAllNetworkInterfaces().Length > 0) {
+                    NetworkInterface nic = NetworkInterface.GetAllNetworkInterfaces()[0];
+                }
+
                 wb.Encoding = System.Text.Encoding.UTF8;
                 init_data = wb.DownloadString(String.Format("{0:s}/fppos/ping?pos_id={1:s}&pos_ver={2:s}", system_const.entry, ConfigurationManager.AppSettings["pos_id"], system_const.version));
                 if (init_data == "update")

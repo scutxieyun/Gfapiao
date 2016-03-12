@@ -101,7 +101,7 @@ namespace skWebShell {
         }
         
         /// <summary>
-        ///   查找类似 http://127.0.0.1/public/index.php 的本地化字符串。
+        ///   查找类似 http://aifapiao.duapp.com/public/index.php 的本地化字符串。
         /// </summary>
         internal static string entry {
             get {
@@ -190,7 +190,7 @@ namespace skWebShell {
         }
         
         /// <summary>
-        ///   查找类似 1.03 的本地化字符串。
+        ///   查找类似 1.04 的本地化字符串。
         /// </summary>
         internal static string version {
             get {
