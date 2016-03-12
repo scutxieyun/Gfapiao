@@ -26,16 +26,26 @@ namespace skWebShell
         ISkInteract sk_ops;
         int doc_loaded_cnt = 0;
 
-        public fmMain()
+        public fmMain(String init_data)
         {
             InitializeComponent();
             String url = String.Format("{0:s}/fppos/index?pos_id={1:s}", system_const.entry, ConfigurationManager.AppSettings["pos_id"]);
             m_url = new Uri(url);
-            //mWorkClient.Op
-            mWorkClient.OpenReadCompleted += MWorkClient_OpenReadCompleted;
-            tcMain.Height = scMain.Panel2.Height - fpOperation.Height;
+
+            this.plCrArea.Height = scMain.Panel2.Height - fpOperation.Height;
+            tcMain.Height = this.plCrArea.Height - this.plStoreInfo.Height;
+
+
+            hideToolPanel();
+
             sk_ops = ISkInteract.create(wbMain);
+            if (init_data != null) {
+                FapiaoItems res = FapiaoItems.create(init_data);
+                if (res != null) { this.Handle_Incomming_Request(res); }
+            }
+            mWorkClient.OpenReadCompleted += MWorkClient_OpenReadCompleted;
         }
+
 
         private void MWorkClient_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
         {
@@ -55,6 +65,7 @@ namespace skWebShell
         }
         private void Handle_Incomming_Request(FapiaoItems req)
         {
+            bool new_item = false;
             if (req.items != null)
             {
                 if (btShowPanel.Visible) {
@@ -67,8 +78,20 @@ namespace skWebShell
                     n.SubItems.Add(String.Format("台/单:{0:s} {1:s}元",item.position,item.amount));
                     n.SubItems.Add(item.fapiao_title);
                     n.Tag = item;
-                    lvActReq.Items.Add(n);
+                    if (item.result == null || item.result == "finished")
+                    {
+                        if (item.status == "打印被拒绝") n.BackColor = Color.Red;
+                        lvDoneList.Items.Add(n);
+                    }
+                    else
+                    {
+                        lvActReq.Items.Add(n);
+                        new_item = true;
+                    }
                 }
+            }
+            if (new_item) {
+                notifyForNewItem();
             }
         }
 
@@ -139,7 +162,7 @@ namespace skWebShell
                         m_pending_printed_ids = m_pending_printed_ids + "|" + fp.id+",d";
                     }
                     item.Remove();
-                    fp.status = "rejected";
+                    fp.status = "打印被拒绝";
                     lvDoneList.Items.Add(item);
                     item.BackColor = Color.Red;
                     kickoff_rpt_retrieve();
@@ -156,16 +179,27 @@ namespace skWebShell
 
         private void btTest_Click(object sender, EventArgs e)
         {
+            hideToolPanel();
+        }
+
+        private void hideToolPanel() {
             scMain.Panel2Collapsed = true;
             btShowPanel.Visible = true;
             btShowPanel.BackColor = Color.Silver;
+            btShowPanel.Text = "显示工具";
         }
 
-        bool forceUrl = false;
+        private void notifyForNewItem() {
+            if (btShowPanel.Visible == true) {
+                btShowPanel.BackColor = Color.Red;
+                btShowPanel.Text = "有新请求";
+            }
+        }
+
         private void wbMain_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             doc_loaded_cnt++;
-            this.Text = "发票易 - " + wbMain.Document.Title;
+            this.Text = "开票易 - " + wbMain.Document.Title;
             if (e.Url.ToString().Contains("https://fp.gdltax.gov.cn/fpzx/jsp/fpzx/common/transition.jsp")) {
                 /*if (forceUrl == false)
                 {
@@ -253,7 +287,6 @@ namespace skWebShell
         }
         private void btShowPanel_Click(object sender, EventArgs e)
         {
-            wbMain.Document.InvokeScript("init_function");
             scMain.Panel2Collapsed = false;
             btShowPanel.Visible = false;
         }
@@ -340,7 +373,7 @@ namespace skWebShell
             {
                 lvActReq_DoubleClick(sender, e);
             }
-            if (e.KeyChar == (char)Keys.Delete || e.KeyChar == (char)Keys.D)
+            if (e.KeyChar == (char)Keys.D)
             {
                 lvActReq_Delete_Item_Action(sender, e);
             }
@@ -357,6 +390,14 @@ namespace skWebShell
         {
             string targetUrl = e.Link.LinkData as string;
             System.Diagnostics.Process.Start(targetUrl);
+        }
+
+        private void lvActReq_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                lvActReq_Delete_Item_Action(sender, e);
+            }
         }
     }
 }

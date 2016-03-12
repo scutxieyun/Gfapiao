@@ -53,6 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FapiaoEntity.cs" />
+    <Compile Include="fmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fmLogin.Designer.cs">
+      <DependentUpon>fmLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="fmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +72,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>system_const.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="fmLogin.resx">
+      <DependentUpon>fmLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fmMain.resx">
       <DependentUpon>fmMain.cs</DependentUpon>
     </EmbeddedResource>

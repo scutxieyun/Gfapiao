@@ -15,12 +15,21 @@ namespace skWebShell
         static void Main()
         {
             WebClient wb = new WebClient();
+            String init_data = null;
             try
             {
-                String res = wb.DownloadString(String.Format("{0:s}/fppos/ping?pos_id={1:s}&pos_ver={2:s}",system_const.entry,ConfigurationManager.AppSettings["pos_id"],system_const.version));
-                if (res == "update") {
+                wb.Encoding = System.Text.Encoding.UTF8;
+                init_data = wb.DownloadString(String.Format("{0:s}/fppos/ping?pos_id={1:s}&pos_ver={2:s}", system_const.entry, ConfigurationManager.AppSettings["pos_id"], system_const.version));
+                if (init_data == "update")
+                {
                     if (startUpdate()) return;
                 }
+                if (init_data == "unregistered") {
+                    MessageBox.Show("终端没有注册，请联系开票易技术支持");
+                    (new fmLogin()).ShowDialog();
+                    return;
+                }
+                
             }
             catch(Exception e) { 
                 
@@ -28,12 +37,12 @@ namespace skWebShell
             checkAndCreateShortcut();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new fmMain());
+            Application.Run(new fmMain(init_data));
         }
         static bool startUpdate() {
             try
             {
-                Process p = Process.Start("UpdateTool.exe", String.Format("{0:s}/fpmgt/download", system_const.entry));
+                Process p = Process.Start("UpdateTool.exe", String.Format("{0:s}/fpmgt/download", system_const.entry2));
             }
             catch (Exception ex) {
                 return false;

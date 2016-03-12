@@ -101,11 +101,20 @@ namespace skWebShell {
         }
         
         /// <summary>
-        ///   查找类似 http://aifapiao.duapp.com/public/index.php 的本地化字符串。
+        ///   查找类似 http://127.0.0.1/public/index.php 的本地化字符串。
         /// </summary>
         internal static string entry {
             get {
                 return ResourceManager.GetString("entry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 http://aifapiao.duapp.com/public/index.php 的本地化字符串。
+        /// </summary>
+        internal static string entry2 {
+            get {
+                return ResourceManager.GetString("entry2", resourceCulture);
             }
         }
         
@@ -161,6 +170,15 @@ namespace skWebShell {
         }
         
         /// <summary>
+        ///   查找类似 http://192.168.1.107/public/index.php 的本地化字符串。
+        /// </summary>
+        internal static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 function install_hook(){
         ///	alert(&quot;Test&quot;);
         ///} 的本地化字符串。
@@ -172,7 +190,7 @@ namespace skWebShell {
         }
         
         /// <summary>
-        ///   查找类似 1.01 的本地化字符串。
+        ///   查找类似 1.03 的本地化字符串。
         /// </summary>
         internal static string version {
             get {

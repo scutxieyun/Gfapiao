@@ -49,6 +49,9 @@ namespace skWebShell
         [XmlAttribute("id")]
         public string id
         { get; set; }
+        [XmlElementAttribute("result")]
+        public string result
+        { get; set; }
 
     }
 }
