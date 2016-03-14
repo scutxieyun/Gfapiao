@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
-
+using System.Diagnostics;
 namespace UpdateTool
 {
     public partial class fmMain : Form
@@ -69,6 +69,7 @@ namespace UpdateTool
                     MessageBox.Show(ex.Message);
                 }
                 btBegin.Text = "退出";
+                btRun.Visible = true;
             }
             else {
                 MessageBox.Show(e.Error.Message);
@@ -97,6 +98,19 @@ namespace UpdateTool
             if (btBegin.Text == "退出") {
                 Application.Exit();
             }
+        }
+
+        private void btRun_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process p = Process.Start("skWebShell.exe");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("执行新程序失败，结束升级后请重试 " + ex.Message);
+            }
+            this.Close();
         }
     }
 }

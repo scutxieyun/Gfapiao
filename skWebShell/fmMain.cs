@@ -29,7 +29,7 @@ namespace skWebShell
         public fmMain(String init_data)
         {
             InitializeComponent();
-            String url = String.Format("{0:s}/fppos/index?pos_id={1:s}", system_const.entry, ConfigurationManager.AppSettings["pos_id"]);
+            String url = String.Format("{0:s}/fppos/index?pos_id={1:s}", system_const.entry, Program.pos_id);
             m_url = new Uri(url);
 
             this.plCrArea.Height = scMain.Panel2.Height - fpOperation.Height;
@@ -327,7 +327,7 @@ namespace skWebShell
         private void fmMain_Load(object sender, EventArgs e)
         {
             renderQRCode();
-            this.llStoreURL.Links.Add(0, 4, String.Format("{0:s}/fpmgt/index?pos_id={1:s}",system_const.entry,ConfigurationManager.AppSettings["pos_id"].Trim()));
+            this.llStoreURL.Links.Add(0, 4, String.Format("{0:s}/fpmgt/index?pos_id={1:s}&nic={2:s}",system_const.entry,Program.pos_id.Trim(),Program.nic.GetPhysicalAddress()));
         }
 
         private void renderQRCode()
@@ -335,7 +335,7 @@ namespace skWebShell
             string level = "M";
             QRCodeGenerator.ECCLevel eccLevel = (QRCodeGenerator.ECCLevel)(level == "L" ? 0 : level == "M" ? 1 : level == "Q" ? 2 : 3);
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(String.Format("{0:s}/fppos/anonymousindex?pos_id={1:s}",system_const.entry,ConfigurationManager.AppSettings["pos_id"]), eccLevel);
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(String.Format("{0:s}/fppos/anonymousindex?pos_id={1:s}",system_const.entry,Program.pos_id), eccLevel);
             QRCode qrCode = new QRCode(qrCodeData);
 
             pbScan.Image = qrCode.GetGraphic(10, Color.Black, Color.White, null, 0);

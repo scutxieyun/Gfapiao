@@ -7,12 +7,14 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.Security.Cryptography;
+using System.Configuration;
 namespace skWebShell
 {
     public partial class fmLogin : Form
     {
         WebClient wb = new WebClient();
         String hashed_code;
+        int supress_count = 120;
         public fmLogin()
         {
             InitializeComponent();
@@ -29,19 +31,32 @@ namespace skWebShell
             }
             if (str == "unregistered")
             {
-                MessageBox.Show("请点击注册链接");
+                MessageBox.Show("手机号码没有注册，请点击注册链接");
                 return;
 
             }
             hashed_code = str;
-            btValidate.Enabled = true;
+            tbValidate.Enabled = true;
+            btGetConf.Enabled = true;
+            trSuppress.Enabled = true;
+            btValidate.Enabled = false;
+            supress_count = 120;
         }
 
         private void btGetConf_Click(object sender, EventArgs e)
         {
             if (hashed_code != null && hashed_code == generateMD5(tbValidate.Text))
             {
-                MessageBox.Show("correct");
+                String str1 = wb.DownloadString(String.Format("{0:s}/fpmgt/validphone?mobile={1:s}&verifycode={2:s}&nic={3:s}", system_const.entry, this.tbMobile.Text, tbValidate.Text,Program.nic.GetPhysicalAddress()));
+                if (str1 != "error") {
+                    this.DialogResult = DialogResult.OK;
+                    System.Configuration.Configuration config =
+                            ConfigurationManager.OpenExeConfiguration
+                                        (ConfigurationUserLevel.None);
+                    config.AppSettings.Settings["pos_id"].Value = str1;
+                    config.Save();
+                    Program.pos_id = str1;
+                }
             }
             else {
                 MessageBox.Show("验证码不正确");
@@ -71,6 +86,16 @@ namespace skWebShell
         private void tbMobile_TextChanged(object sender, EventArgs e)
         {
             tbValidate.Enabled = false;
+        }
+
+        private void trSuppress_Tick(object sender, EventArgs e)
+        {
+            btValidate.Text = String.Format("剩下{0:d}秒", supress_count--);
+            if (supress_count == 0) {
+                trSuppress.Enabled = false;
+                btValidate.Enabled = true;
+                btValidate.Text = "获取验证码";
+            }
         }
     }
 }

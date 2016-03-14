@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btBegin = new System.Windows.Forms.Button();
             this.tbFiles = new System.Windows.Forms.TextBox();
+            this.btRun = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // pbDownload
@@ -72,11 +73,23 @@
             this.tbFiles.Size = new System.Drawing.Size(245, 80);
             this.tbFiles.TabIndex = 3;
             // 
+            // btRun
+            // 
+            this.btRun.Location = new System.Drawing.Point(164, 123);
+            this.btRun.Name = "btRun";
+            this.btRun.Size = new System.Drawing.Size(75, 32);
+            this.btRun.TabIndex = 4;
+            this.btRun.Text = "运行";
+            this.btRun.UseVisualStyleBackColor = true;
+            this.btRun.Visible = false;
+            this.btRun.Click += new System.EventHandler(this.btRun_Click);
+            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(347, 166);
+            this.Controls.Add(this.btRun);
             this.Controls.Add(this.tbFiles);
             this.Controls.Add(this.btBegin);
             this.Controls.Add(this.label1);
@@ -97,6 +110,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btBegin;
         private System.Windows.Forms.TextBox tbFiles;
+        private System.Windows.Forms.Button btRun;
     }
 }
 

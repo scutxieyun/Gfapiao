@@ -21,12 +21,11 @@ function install_hook(){
 			}
 			autoCompleteFkfMc.setDataSource(data);
 			mydelay = window.setTimeout(showAutoComplete, 0);
-		}
+		} 
 	}
 	var je = document.getElementById("je");
-	var skf = document.getElementById("skfMc");
 	if(je != null){
-		je.onblur = function(){xy_fkf = mc.value;if(skf!=null)xy_skf=skf.value;xy_je = je.value;xy_collectFPInfo(xy_skf,xy_fkf,xy_je);};
+		je.onblur = function(){xy_fkf = mc.value;xy_je = je.value;xy_collectFPInfo("",xy_fkf,xy_je);};
 	}
 }
 
@@ -35,12 +34,13 @@ function showAutoComplete(){
 }
 
 function xy_collectFPInfo(skf,fkf,je){
-	var url = "https://aifapiao.duapp.com/public/index.php/fppos/collectfp?skf=" + skf + "&fkf=" + fkf + "&je=" + je;
-	xmlrequest = new XMLHttpRequest();
-
-	xmlrequest.open("GET", url, true);  
-    //∑¢ÀÕ«Î«Û  
-    xmlrequest.send(null);  
+	if(fkf != ""){
+		var url = "https://aifapiao.duapp.com/public/index.php/fppos/collectfp?skf=" + skf + "&fkf=" + fkf + "&je=" + je;
+		var fileref=document.createElement('script');
+		fileref.setAttribute("type","text/javascript");
+		fileref.setAttribute("src", url);
+		document.getElementsByTagName("head")[0].appendChild(fileref);
+	} 
 }
 
 function loadCmpListAsyn(key){

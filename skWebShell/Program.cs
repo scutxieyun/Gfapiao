@@ -9,46 +9,52 @@ namespace skWebShell
 {
     static class Program
     {
+        static public String pos_id = "unknown";
+        static public NetworkInterface nic = null;
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
         static void Main()
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
             WebClient wb = new WebClient();
             String init_data = null;
             try
             {
 
-                if (NetworkInterface.GetAllNetworkInterfaces().Length > 0) {
-                    NetworkInterface nic = NetworkInterface.GetAllNetworkInterfaces()[0];
+                if (NetworkInterface.GetAllNetworkInterfaces().Length > 0)
+                {
+                    nic = NetworkInterface.GetAllNetworkInterfaces()[0];
                 }
-
+                else {
+                    MessageBox.Show("不能检测到网络连接，请检查网卡");
+                    return;
+                }
+                pos_id = ConfigurationManager.AppSettings["pos_id"];
                 wb.Encoding = System.Text.Encoding.UTF8;
-                init_data = wb.DownloadString(String.Format("{0:s}/fppos/ping?pos_id={1:s}&pos_ver={2:s}", system_const.entry, ConfigurationManager.AppSettings["pos_id"], system_const.version));
+                init_data = wb.DownloadString(String.Format("{0:s}/fppos/ping?pos_id={1:s}&pos_ver={2:s}&nic={3:s}", system_const.entry, pos_id, system_const.version,nic.GetPhysicalAddress()));
                 if (init_data == "update")
                 {
                     if (startUpdate()) return;
                 }
                 if (init_data == "unregistered") {
-                    MessageBox.Show("终端没有注册，请联系开票易技术支持");
-                    (new fmLogin()).ShowDialog();
-                    return;
+                    if((new fmLogin()).ShowDialog() == DialogResult.Cancel) return;
                 }
                 
             }
-            catch(Exception e) { 
-                
+            catch(Exception e) {
+                MessageBox.Show("系统错误，请联系技术支持 " + e.Message);
+                return;
             }
             checkAndCreateShortcut();
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new fmMain(init_data));
         }
         static bool startUpdate() {
             try
             {
-                Process p = Process.Start("UpdateTool.exe", String.Format("{0:s}/fpmgt/download", system_const.entry2));
+                Process p = Process.Start("UpdateTool.exe", String.Format("{0:s}/fpmgt/download", system_const.entry));
             }
             catch (Exception ex) {
                 return false;

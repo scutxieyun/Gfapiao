@@ -190,7 +190,7 @@ namespace skWebShell {
         }
         
         /// <summary>
-        ///   查找类似 1.04 的本地化字符串。
+        ///   查找类似 1.05 的本地化字符串。
         /// </summary>
         internal static string version {
             get {

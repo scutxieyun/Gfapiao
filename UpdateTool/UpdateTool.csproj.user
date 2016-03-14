@@ -4,4 +4,7 @@
     <StartAction>Project</StartAction>
     <StartArguments>http://127.0.0.1/public/index.php/fpmgt/download</StartArguments>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <StartArguments>http://aifapiao.duapp.com/public/index.php/fpmgt/download</StartArguments>
+  </PropertyGroup>
 </Project>
