@@ -8,25 +8,35 @@ using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Net.NetworkInformation;
 using WndInteract;
 
 namespace GFapiaoClient
 {
     static class Program
     {
-
+        static public String pos_id = "unknown";
+        static public NetworkInterface nic = null;
         static WebClient mWorkClient = new WebClient();
 
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(String[] args)
         {
             Win32Locator.KickOffEnumWindows();
 
-
-
+            pos_id = ConfigurationManager.AppSettings["pos_id"];
+            if (NetworkInterface.GetAllNetworkInterfaces().Length > 0)
+            {
+                nic = NetworkInterface.GetAllNetworkInterfaces()[0];
+            }
+            else
+            {
+                MessageBox.Show("不能检测到网络连接，请检查网卡");
+                return;
+            }
             mWorkClient.Encoding = System.Text.Encoding.UTF8;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -43,7 +53,7 @@ namespace GFapiaoClient
                     if (g_str == null)
                     {
                         //prompt to select
-                        MessageBox.Show("please select a shuikong winds");
+                        MessageBox.Show("没有检测到税控软件，请启动。如果已经启动，请联系技术支持");
                         return; 
                     }
                     if (!downloadSkCfg(g_str))
@@ -59,16 +69,34 @@ namespace GFapiaoClient
                     return;
                 }
             }
-            Application.Run(new fmMain());
-        }
 
+            string init_data = null;
+            try
+            {
+                init_data = mWorkClient.DownloadString(String.Format("{0:s}/ping?pos_id={1:s}", system_const.service_url, Program.pos_id));
+                if (init_data == "update")
+                {
+                    return;
+                }
+                if (init_data == "unregistered")
+                {
+                    MessageBox.Show("终端没有注册，请联系开票易技术支持");
+                    return;
+                }
+            }
+            catch (Exception e) {
+                MessageBox.Show("连接服务错误");
+                return;
+            }
+            Application.Run(new fmMain(init_data));
+        }
         private static bool downloadSkCfg(String wnd_str) {
             System.Drawing.Rectangle resolution = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
             String url = string.Format("{0:s}/cfgfile?wndtitle={1:s}&x_res={2:d}&y_res={3:d}",system_const.service_url , wnd_str, resolution.Width, resolution.Height);
             WebClient w_cli = new WebClient();
             try
             {
-                w_cli.DownloadFile(url, "tmp_" + system_const.sk_script_fn);
+                w_cli.DownloadFile(url, system_const.sk_script_fn);//"tmp_" + system_const.sk_script_fn);
                 return true;
             }
             catch (IOException io_ex)
